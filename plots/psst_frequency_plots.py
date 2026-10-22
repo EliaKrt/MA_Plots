@@ -10,6 +10,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import plotly.io as pio
 import matplotlib.colors as mcolors
+from Plot_Template import *
 
 def calculate_rms(data):
 
@@ -312,9 +313,11 @@ def plot_psst_frequency_response(
 
     else:
 
-        ax.set_xlim(
-            freq_range[0],
-            freq_range[1]
+        ax.set_xlim(*freq_range)
+
+        autoscale_y(
+            ax,
+            *freq_range
         )
 
     ax.set_xlabel(

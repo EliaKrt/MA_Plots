@@ -3,6 +3,7 @@ import glob
 import matplotlib.pyplot as plt
 import numpy as np
 from nptdms import TdmsFile
+from Plot_Template import *
 
 TRIANGULAR_FILES = [
     "TriangularResponse.tdms",
@@ -140,9 +141,28 @@ def load_triangular_response(filepath):
         force_channel
     )
 
-    position_time -= position_time[0]
-    pressure_time -= pressure_time[0]
-    force_time -= force_time[0]
+    position_norm = normalize_signal(position)
+
+    peak_idx = np.argmax(
+        position_norm
+    )
+
+    time_shift = position_time[peak_idx]
+
+    position_time = (
+        position_time
+        - time_shift
+    )
+
+    pressure_time = (
+        pressure_time
+        - time_shift
+    )
+
+    force_time = (
+        force_time
+        - time_shift
+    )
 
     pressure = interpolate_to_time(
         pressure_time,
@@ -166,7 +186,12 @@ def load_triangular_response(filepath):
 def create_common_time_axis(
         measurements):
 
-    shortest_time = min(
+    start_time = max(
+        m["time"][0]
+        for m in measurements
+    )
+
+    end_time = min(
         m["time"][-1]
         for m in measurements
     )
@@ -184,8 +209,8 @@ def create_common_time_axis(
     )
 
     return np.arange(
-        0,
-        shortest_time,
+        start_time,
+        end_time,
         dt
     )
 
@@ -297,8 +322,18 @@ def plot_triangular_response(
             axis=0
         )
 
+        start_idx = np.where(
+            position_mean > 0.01
+        )[0][0]
+        
+        time_offset = common_time[
+                    start_idx
+                ]
+        
+        plot_time = (common_time - time_offset)
+
         ax.plot(
-            common_time,
+            plot_time,
             mean_curve,
             color=color,
             label=group_name
@@ -307,7 +342,7 @@ def plot_triangular_response(
         if show_std:
 
             ax.plot(
-                common_time,
+                plot_time,
                 mean_curve + std_curve,
                 "--",
                 color=color,
@@ -315,7 +350,7 @@ def plot_triangular_response(
             )
 
             ax.plot(
-                common_time,
+                plot_time,
                 mean_curve - std_curve,
                 "--",
                 color=color,
@@ -328,7 +363,7 @@ def plot_triangular_response(
         ):
 
             ax.plot(
-                common_time,
+                plot_time,
                 position_mean,
                 "--",
                 color="black",
@@ -340,9 +375,11 @@ def plot_triangular_response(
 
     if time_range is not None:
 
-        ax.set_xlim(
-            time_range[0],
-            time_range[1]
+        ax.set_xlim(*time_range)
+
+        autoscale_y(
+            ax,
+            *time_range
         )
 
     ax.set_xlabel(

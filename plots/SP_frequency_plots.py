@@ -3,7 +3,7 @@ import glob
 
 import numpy as np
 from nptdms import TdmsFile
-
+from Plot_Template import *
 
 def calculate_rms(data):
 
@@ -182,9 +182,11 @@ def plot_group_frequency_response(
 
     if freq_range:
 
-        ax.set_xlim(
-            freq_range[0],
-            freq_range[1]
+        ax.set_xlim(*freq_range)
+        
+        autoscale_y(
+            ax,
+            *freq_range
         )
 
     else:

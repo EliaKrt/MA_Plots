@@ -11,17 +11,18 @@ SP_groups = {
     "Concept3": [r"C:\Users\320309817\OneDrive - Philips\Advanced Monitoring Cuff - 03_Elia_Krutti\03_Experiments\AMC_EK_08_261009\01_RawData\SP_final_tester\Prototypes"],
     "Reference": [r"C:\Users\320309817\OneDrive - Philips\Advanced Monitoring Cuff - 03_Elia_Krutti\03_Experiments\AMC_EK_06_260730\01_RawData\SP_final_tester\Reference",
                   r"C:\Users\320309817\OneDrive - Philips\Advanced Monitoring Cuff - 03_Elia_Krutti\03_Experiments\AMC_EK_08_261009\01_RawData\SP_final_tester\Reference",
+                  r"C:\Users\320309817\OneDrive - Philips\Advanced Monitoring Cuff - 03_Elia_Krutti\03_Experiments\AMC_EK_04_260622\01_RawData",
                   ],
 }
 
 Cuff_groups = {
     "Concept1": [r"C:\Users\320309817\OneDrive - Philips\Advanced Monitoring Cuff - 03_Elia_Krutti\03_Experiments\AMC_EK_06_260730\05_PSST_Tests\Prototypes"],
     "Concept2": [r"C:\Users\320309817\OneDrive - Philips\Advanced Monitoring Cuff - 03_Elia_Krutti\03_Experiments\AMC_EK_07_260827\05_PSST_Tests\Prototypes"],
-    "Concept3": [r"C:\Users\320309817\OneDrive - Philips\Advanced Monitoring Cuff - 03_Elia_Krutti\03_Experiments\AMC_EK_06_260730\05_PSST_Tests\Prototypes"],
+    "Concept3": [r"C:\Users\320309817\OneDrive - Philips\Advanced Monitoring Cuff - 03_Elia_Krutti\03_Experiments\AMC_EK_08_261009\05_PSST_Tests\Prototypes"],
     "Reference": [r"C:\Users\320309817\OneDrive - Philips\Advanced Monitoring Cuff - Test Results"],
+    #"Reference": [r"C:\Users\320309817\OneDrive - Philips\Advanced Monitoring Cuff - 03_Elia_Krutti\03_Experiments\AMC_EK_06_260730\05_PSST_Tests\Reference"],
 }
 
-'''
 fig, ax = create_layout(
     nplots=8,
     ncols=4,
@@ -45,6 +46,7 @@ plot_group_frequency_response(
     show_legend=not global_legend,
     normalize=True,
     show_std=True,
+    show_3db=False,
     freq_range=(0,20)
 )
 
@@ -62,7 +64,7 @@ plot_triangular_response(
     show_legend=not global_legend,
     show_std=False,
     show_position=True,
-    time_range=(0.12, 0.18)
+    time_range=(0.09, 0.11)
 )
 
 plot_psst_frequency_response(
@@ -82,7 +84,7 @@ plot_psst_frequency_response(
     show_legend=not global_legend,
     normalize=True,
     show_std=True,
-    show_3db=True,
+    show_3db=False,
     freq_range=(0,20),
     exclude_dirs=EXCLUDE_DIRS,
     valid_sizes=VALID_SIZES
@@ -104,7 +106,7 @@ plot_psst_triangular_response(
     show_legend=not global_legend,
     show_std=False,
     show_position=True,
-    time_range=(0.08, 0.18),
+    time_range=(0.09, 0.11),
     exclude_dirs=EXCLUDE_DIRS,
     valid_sizes=VALID_SIZES
 )
@@ -116,8 +118,8 @@ add_global_legend(
 )
 
 save_figure(fig, "test")
-'''
 
+'''
 fig, ax = create_layout(
     nplots=4,
     ncols=2,
@@ -174,3 +176,4 @@ add_global_legend(
 )
 
 save_figure(fig, "frequency")
+'''
