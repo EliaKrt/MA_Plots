@@ -9,10 +9,10 @@ EXCLUDE_DIRS = [
 ]
 
 VALID_SIZES = [
-    #"small adult",
-    "adult",
-    #"large adult",
-    #"large adult short"
+    #"Small Adult ShellCuff",
+    "Adult ShellCuff",
+    #"Large Adult ShellCuff",
+    #"Large Adult Short ShellCuff"
 ]
 
 PANEL_TITLES_8 = {

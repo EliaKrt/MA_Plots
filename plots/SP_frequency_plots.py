@@ -70,6 +70,8 @@ def plot_group_frequency_response(
     for label, folders in groups.items():
 
         curves = []
+        n_found = 0
+        n_used = 0
 
         for folder in folders:
 
@@ -83,6 +85,7 @@ def plot_group_frequency_response(
             )
 
             for file in files:
+                n_found += 1
 
                 try:
 
@@ -98,12 +101,16 @@ def plot_group_frequency_response(
                     )
 
                     curves.append(interp)
+                    n_used +=1
 
                 except:
                     pass
 
         if len(curves) == 0:
             continue
+        print("SP_Tester-Frequency: "
+        f"{label}: "
+        f"{n_used}/{n_found} files used")
 
         curves = np.asarray(curves)
 

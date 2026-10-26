@@ -127,9 +127,14 @@ def is_valid_file(
 
         found_size = False
 
+        path_parts = [
+            part.lower()
+            for part in filepath.split(os.sep)
+        ]
+
         for size in valid_sizes:
 
-            if size.lower() in path_low:
+            if size.lower() in path_parts:
 
                 found_size = True
                 break
@@ -307,6 +312,8 @@ def plot_psst_triangular_response(
         ]
 
         measurements = []
+        n_found = 0
+        n_used = 0
 
         for folder in folders:
 
@@ -320,6 +327,7 @@ def plot_psst_triangular_response(
             )
 
             for file in files:
+                n_found += 1
 
                 if not is_valid_file(
                         file,
@@ -335,6 +343,7 @@ def plot_psst_triangular_response(
                             file
                         )
                     )
+                    n_used += 1
 
                 except Exception as e:
 
@@ -351,8 +360,10 @@ def plot_psst_triangular_response(
             print(
                 f"{group_name}: no valid measurements"
             )
-
             continue
+        print("PSST-Triangular Response: "
+            f"{group_name}: "
+            f"{n_used}/{n_found} files used")
 
         common_time = (
             create_common_time_axis(

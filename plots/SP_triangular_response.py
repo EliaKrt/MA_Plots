@@ -236,6 +236,8 @@ def plot_triangular_response(
         ]
 
         measurements = []
+        n_found = 0
+        n_used = 0
 
         for folder in folders:
 
@@ -251,6 +253,7 @@ def plot_triangular_response(
                 )
 
                 for file in files:
+                    n_found += 1
 
                     try:
 
@@ -259,6 +262,7 @@ def plot_triangular_response(
                                 file
                             )
                         )
+                        n_used += 1
 
                     except Exception:
 
@@ -266,6 +270,9 @@ def plot_triangular_response(
 
         if len(measurements) == 0:
             continue
+        print("SP-Triangular Response: "
+            f"{group_name}: "
+            f"{n_used}/{n_found} files used")
 
         common_time = create_common_time_axis(
             measurements

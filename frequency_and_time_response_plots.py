@@ -6,8 +6,8 @@ apply_style()
 global_legend = True
 
 SP_groups = {
-    "Concept1": [r"C:\Users\320309817\OneDrive - Philips\Advanced Monitoring Cuff - 03_Elia_Krutti\03_Experiments\AMC_EK_06_260730\01_RawData\SP_final_tester\Prototypes"],
-    "Concept2": [r"C:\Users\320309817\OneDrive - Philips\Advanced Monitoring Cuff - 03_Elia_Krutti\03_Experiments\AMC_EK_07_260827\01_RawData\SP_final_tester\Prototypes"],
+    "Concept1": [r"C:\Users\320309817\OneDrive - Philips\Advanced Monitoring Cuff - 03_Elia_Krutti\03_Experiments\AMC_EK_07_260827\01_RawData\SP_final_tester\Prototypes"],
+    "Concept2": [r"C:\Users\320309817\OneDrive - Philips\Advanced Monitoring Cuff - 03_Elia_Krutti\03_Experiments\AMC_EK_06_260730\01_RawData\SP_final_tester\Prototypes"],
     "Concept3": [r"C:\Users\320309817\OneDrive - Philips\Advanced Monitoring Cuff - 03_Elia_Krutti\03_Experiments\AMC_EK_08_261009\01_RawData\SP_final_tester\Prototypes"],
     "Reference": [r"C:\Users\320309817\OneDrive - Philips\Advanced Monitoring Cuff - 03_Elia_Krutti\03_Experiments\AMC_EK_06_260730\01_RawData\SP_final_tester\Reference",
                   r"C:\Users\320309817\OneDrive - Philips\Advanced Monitoring Cuff - 03_Elia_Krutti\03_Experiments\AMC_EK_08_261009\01_RawData\SP_final_tester\Reference",
@@ -16,8 +16,8 @@ SP_groups = {
 }
 
 Cuff_groups = {
-    "Concept1": [r"C:\Users\320309817\OneDrive - Philips\Advanced Monitoring Cuff - 03_Elia_Krutti\03_Experiments\AMC_EK_06_260730\05_PSST_Tests\Prototypes"],
-    "Concept2": [r"C:\Users\320309817\OneDrive - Philips\Advanced Monitoring Cuff - 03_Elia_Krutti\03_Experiments\AMC_EK_07_260827\05_PSST_Tests\Prototypes"],
+    "Concept1": [r"C:\Users\320309817\OneDrive - Philips\Advanced Monitoring Cuff - 03_Elia_Krutti\03_Experiments\AMC_EK_07_260827\05_PSST_Tests\Prototypes"],
+    "Concept2": [r"C:\Users\320309817\OneDrive - Philips\Advanced Monitoring Cuff - 03_Elia_Krutti\03_Experiments\AMC_EK_06_260730\05_PSST_Tests\Prototypes"],
     "Concept3": [r"C:\Users\320309817\OneDrive - Philips\Advanced Monitoring Cuff - 03_Elia_Krutti\03_Experiments\AMC_EK_08_261009\05_PSST_Tests\Prototypes"],
     "Reference": [r"C:\Users\320309817\OneDrive - Philips\Advanced Monitoring Cuff - Test Results"],
     #"Reference": [r"C:\Users\320309817\OneDrive - Philips\Advanced Monitoring Cuff - 03_Elia_Krutti\03_Experiments\AMC_EK_06_260730\05_PSST_Tests\Reference"],
