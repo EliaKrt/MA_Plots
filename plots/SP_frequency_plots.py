@@ -3,6 +3,7 @@ import glob
 
 import numpy as np
 from nptdms import TdmsFile
+from matplotlib.ticker import MultipleLocator
 from Plot_Template import *
 
 def calculate_rms(data):
@@ -198,10 +199,9 @@ def plot_group_frequency_response(
 
     else:
 
-        ax.set_xlim(
-            0,
-            100
-        )
+        ax.set_xlim(0, 100)
+        ax.set_ylim(0.7, 2.5)
+        ax.yaxis.set_major_locator(MultipleLocator(0.2))
 
     ax.set_xlabel(
         "Frequency [Hz]"

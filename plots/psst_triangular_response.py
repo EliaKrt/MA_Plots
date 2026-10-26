@@ -288,6 +288,7 @@ def plot_psst_triangular_response(
         ax,
         groups,
         show_legend=True,
+        show_values=True,
         show_std=True,
         show_position=True,
         time_range=None,
@@ -312,6 +313,7 @@ def plot_psst_triangular_response(
         ]
 
         measurements = []
+        delays = []
         n_found = 0
         n_used = 0
 
@@ -338,12 +340,29 @@ def plot_psst_triangular_response(
 
                 try:
 
-                    measurements.append(
-                        load_psst_triangular_response(
-                            file
-                        )
-                    )
+                    measurement = (load_psst_triangular_response(file))
+                    measurements.append(measurement)
                     n_used += 1
+                    position = measurement["position"]
+                    pressure = measurement["pressure"]
+                    time = measurement["time"]
+
+                    position_peak = time[
+                        np.argmax(position)
+                    ]
+
+                    pressure_peak = time[
+                        np.argmax(pressure)
+                    ]
+
+                    delay_ms = (
+                        pressure_peak
+                        - position_peak
+                    ) * 1000
+
+                    delays.append(
+                        delay_ms
+                    )
 
                 except Exception as e:
 
@@ -370,6 +389,11 @@ def plot_psst_triangular_response(
                 measurements
             )
         )
+
+        delays = np.asarray(delays)
+        delay_mean = np.mean(delays)
+        delay_std = np.std(delays)
+        delay_cv = (delay_std / delay_mean * 100)
 
         pressure_signals = []
 
@@ -438,6 +462,24 @@ def plot_psst_triangular_response(
             color=color,
             label=group_name
         )
+
+        if show_values:
+            print(f"\n{group_name}")
+
+            print(
+                f"Delay Mean = "
+                f"{delay_mean:.2f} ms"
+            )
+
+            print(
+                f"Delay STD = "
+                f"{delay_std:.2f} ms"
+            )
+
+            print(
+                f"Delay CV = "
+                f"{delay_cv:.2f} %"
+            )
 
         if show_std:
 

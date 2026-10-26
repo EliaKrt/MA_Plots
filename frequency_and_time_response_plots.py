@@ -62,6 +62,7 @@ plot_triangular_response(
     ax["D"],
     groups = SP_groups,
     show_legend=not global_legend,
+    show_values=False,
     show_std=False,
     show_position=True,
     time_range=(0.09, 0.11)
@@ -104,6 +105,7 @@ plot_psst_triangular_response(
     ax["H"],
     groups = Cuff_groups,
     show_legend=not global_legend,
+    show_values=False,
     show_std=False,
     show_position=True,
     time_range=(0.09, 0.11),

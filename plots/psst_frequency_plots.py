@@ -6,6 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from nptdms import TdmsFile
 from matplotlib.backends.backend_pdf import PdfPages
+from matplotlib.ticker import MultipleLocator
 import pandas as pd
 import plotly.graph_objects as go
 import plotly.io as pio
@@ -317,10 +318,9 @@ def plot_psst_frequency_response(
 
     if freq_range is None:
 
-        ax.set_xlim(
-            0,
-            100
-        )
+        ax.set_xlim(0, 100)
+        ax.set_ylim(0.7, 2.5)
+        ax.yaxis.set_major_locator(MultipleLocator(0.2))
 
     else:
 
