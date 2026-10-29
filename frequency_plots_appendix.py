@@ -24,15 +24,17 @@ Cuff_groups = {
 }
 
 fig, ax = create_layout(
-    nplots=2,
+    nplots=4,
     ncols=2,
     global_legend=global_legend,
+    panel_labels=PANEL_LABELS_4,
+    panel_titles=PANEL_TITLES_4_FREQ,
 )
 
 # ==================================
 #       SP-Final Tester
 # ==================================
-'''
+
 plot_group_frequency_response(
     ax["A"],
     groups = SP_groups,
@@ -51,20 +53,13 @@ plot_group_frequency_response(
     show_3db=False,
     freq_range=(0,20)
 )
-add_global_legend(
-    fig,
-    ax,
-    ncols=5
-)
 
-save_figure(fig, "Final_tester_not_normalized_frequency")
-'''
 # =================================================
 #       PSST
 # =================================================
 
 plot_psst_frequency_response(
-    ax["A"],
+    ax["C"],
     groups = Cuff_groups,
     show_legend=not global_legend,
     normalize=False,
@@ -75,7 +70,7 @@ plot_psst_frequency_response(
 )
 
 plot_psst_frequency_response(
-    ax["B"],
+    ax["D"],
     groups = Cuff_groups,
     show_legend=not global_legend,
     normalize=False,
@@ -92,4 +87,4 @@ add_global_legend(
     ncols=5
 )
 
-save_figure(fig, "PSST_not_normalized_frequency")
+save_figure(fig, "Not_normalized_frequency")

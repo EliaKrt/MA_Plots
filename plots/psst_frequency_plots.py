@@ -162,6 +162,7 @@ def plot_psst_frequency_response(
         normalize=True,
         show_std=True,
         show_3db=True,
+        show_values = True,
         freq_range=None,
         exclude_dirs=None,
         valid_sizes=None):
@@ -235,9 +236,12 @@ def plot_psst_frequency_response(
 
         if len(curves) == 0:
             continue
-        print("PSST-Frequency: "
-            f"{group_name}: "
-            f"{n_used}/{n_found} files used")
+
+        if show_values:
+            print("PSST-Frequency: "
+                f"{group_name}: "
+                f"{n_used}/{n_found} files used")
+            
         curves = np.asarray(
             curves
         )

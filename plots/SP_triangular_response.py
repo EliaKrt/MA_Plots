@@ -3,6 +3,7 @@ import glob
 import matplotlib.pyplot as plt
 import numpy as np
 from nptdms import TdmsFile
+from scipy.stats import ttest_ind
 from Plot_Template import *
 
 TRIANGULAR_FILES = [
@@ -78,6 +79,26 @@ def interpolate_to_time(
         time_source,
         signal
     )
+
+def cohens_d(x, y):
+
+    nx = len(x)
+    ny = len(y)
+
+    pooled_std = np.sqrt(
+        (
+            (nx - 1) * np.var(x, ddof=1)
+            +
+            (ny - 1) * np.var(y, ddof=1)
+        )
+        /
+        (nx + ny - 2)
+    )
+
+    return (
+        np.mean(x)
+        - np.mean(y)
+    ) / pooled_std
 
 def load_triangular_response(filepath):
 
@@ -221,9 +242,11 @@ def plot_triangular_response(
         show_values=True,
         show_std=True,
         show_position=True,
-        time_range=None):
+        time_range=None,
+        statistic_values=True):
 
     position_plotted = False
+    group_delays ={}
 
     colors = plt.rcParams[
         "axes.prop_cycle"
@@ -289,9 +312,6 @@ def plot_triangular_response(
 
         if len(measurements) == 0:
             continue
-        print("SP-Triangular Response: "
-            f"{group_name}: "
-            f"{n_used}/{n_found} files used")
 
         common_time = create_common_time_axis(
             measurements
@@ -301,6 +321,8 @@ def plot_triangular_response(
         delay_mean = np.mean(delays)
         delay_std = np.std(delays)
         delay_cv = (delay_std / delay_mean * 100)
+
+        group_delays[group_name]= delays
 
         pressure_signals = []
 
@@ -387,6 +409,10 @@ def plot_triangular_response(
                 f"Delay CV = "
                 f"{delay_cv:.2f} %"
             )
+
+            print("SP-Triangular Response: "
+                        f"{group_name}: "
+                        f"{n_used}/{n_found} files used")
             
         if show_std:
 
@@ -421,6 +447,52 @@ def plot_triangular_response(
             )
 
             position_plotted = True
+
+    if statistic_values:
+        if len(group_delays) > 1:
+
+            reference_name = "Reference"
+
+            if reference_name in group_delays:
+
+                reference_delays = (
+                    group_delays[reference_name]
+                )
+
+                print(
+                    "\n--- SP Triangular Response - Statistical Comparison ---"
+                )
+
+                for group_name, delays in group_delays.items():
+
+                    if group_name == reference_name:
+                        continue
+
+                    t_stat, p_value = ttest_ind(
+                        delays,
+                        reference_delays,
+                        equal_var=False
+                    )
+
+                    d = cohens_d(
+                        delays,
+                        reference_delays
+                    )
+
+                    print(
+                        f"\n{group_name} vs "
+                        f"{reference_name}"
+                    )
+
+                    print(
+                        f"p-value = "
+                        f"{p_value:.4f}"
+                    )
+
+                    print(
+                        f"Cohen's d = "
+                        f"{d:.3f}"
+                    )
 
     if time_range is not None:
 

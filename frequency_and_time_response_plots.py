@@ -47,6 +47,7 @@ plot_group_frequency_response(
     normalize=True,
     show_std=True,
     show_3db=False,
+    show_values = False,
     freq_range=(0,20)
 )
 
@@ -65,6 +66,7 @@ plot_triangular_response(
     show_values=False,
     show_std=False,
     show_position=True,
+    statistic_values=False,
     time_range=(0.09, 0.11)
 )
 
@@ -86,6 +88,7 @@ plot_psst_frequency_response(
     normalize=True,
     show_std=True,
     show_3db=False,
+    show_values=False,
     freq_range=(0,20),
     exclude_dirs=EXCLUDE_DIRS,
     valid_sizes=VALID_SIZES
@@ -108,6 +111,7 @@ plot_psst_triangular_response(
     show_values=False,
     show_std=False,
     show_position=True,
+    statistic_values=False,
     time_range=(0.09, 0.11),
     exclude_dirs=EXCLUDE_DIRS,
     valid_sizes=VALID_SIZES

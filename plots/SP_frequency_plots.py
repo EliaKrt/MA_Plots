@@ -64,7 +64,8 @@ def plot_group_frequency_response(
         normalize=True,
         show_std=True,
         show_3db=True,
-        freq_range=None):
+        freq_range=None,
+        show_values=True):
 
     common_freq = np.arange(1,101)
 
@@ -109,9 +110,10 @@ def plot_group_frequency_response(
 
         if len(curves) == 0:
             continue
-        print("SP_Tester-Frequency: "
-        f"{label}: "
-        f"{n_used}/{n_found} files used")
+        if show_values:
+            print("SP_Tester-Frequency: "
+                f"{label}: "
+                f"{n_used}/{n_found} files used")
 
         curves = np.asarray(curves)
 
